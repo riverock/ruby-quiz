@@ -4,11 +4,11 @@ There's no correct way to
 solve this, and take as much time as you need...we're just trying to
 get a look at your coding style and thought process.
 
-Make sure to include the unit tests you write in your submission.
+Make sure to include the unit tests you write for this in your submission.
 
 ## Code
 
-Given a list of words (attached), generate two output
+Given a list of words ([words.tar.gz](https://github.com/riverock/ruby-quiz/blob/master/words.tar.gz)), generate two output
 files, 'questions' and 'answers'.  'questions' should contain every
 sequence of four letters that appears in exactly one word of the
 dictionary, one sequence per line.  'answers' should contain the
