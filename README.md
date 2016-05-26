@@ -52,3 +52,10 @@ and 'answers' would have:
 2. Create a feature branch for your solution (eg [github username]/solution)
 3. Complete work
 4. Open a pull request to submit.
+
+## To Run
+
+1. Open IRB
+2. Load the main file: <tt>load './words.rb'</tt>
+3. Run the main function: <tt>run_words</tt>
+4. Wait for "Complete!" to be returned
