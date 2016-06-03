@@ -16,7 +16,7 @@ RSpec.describe Quiz do
     it 'generates an output of answers' do
       quiz = Quiz.new
       quiz.extract_unique(dictionary, word_length)
-      expect(quiz.answers).to eq(['carrots', 'give', 'carrots', 'arrows', 'carrots', 'arrows'])
+      expect(quiz.answers).to eq(['arrows', 'arrows', 'carrots', 'carrots', 'carrots', 'give'])
       # should be a list of corresponding words that contain the question sequences, in same order
     end
   end
