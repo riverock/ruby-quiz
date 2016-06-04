@@ -1,21 +1,21 @@
 class Quiz
   attr_accessor :questions, :answers
 
-  # TODO takes a file as input, outputs two files.
-  def initialize(file = nil)
+  def initialize(word_length=4)
     @questions = []
     @answers = []
   end
 
   def extract_unique(dictionary, word_length)
     uniques = Hash.new(0)
-    answers = Hash.new(0) 
+    answers = Hash.new(0)
 
-    dictionary.each do |word|
+    dictionary.each_with_index do |word,idx|
       next if word.size < word_length
       word.chars.each_cons(word_length) do |char_group|
-        uniques[char_group.join] += 1
-        answers[char_group.join] = dictionary.index(word) 
+        char = char_group.join
+        uniques[char] += 1
+        answers[char] = idx
       end
     end
 
@@ -26,10 +26,13 @@ class Quiz
       answers.delete(r)
     end
 
-    @questions = uniques.keys # TODO write this to file
+    @questions = uniques.keys 
 
     answers.values.each do |v|
       @answers << dictionary[v]
     end
+
+    File.open('out/questions', 'w') { |f| @questions.each { |q| f.write(q.to_s + "\n") } }
+    File.open('out/answers', 'w') { |f| @answers.each { |a| f.write(a.to_s + "\n") } }
   end
 end
