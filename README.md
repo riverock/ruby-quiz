@@ -1,3 +1,5 @@
+# Run this by passing a file of newline delimited words into main.rb. Output will be in out/questions and out/answers. 
+
 # Instructions
 
 There's no correct way to
