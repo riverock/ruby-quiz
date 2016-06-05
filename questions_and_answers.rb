@@ -4,11 +4,11 @@ module QuestionsAndAnswers
   SEQUENCE_REGEX = Regexp.new("(?=([a-z0-9]{#{SEQUENCE_LENGTH}}))")
 
   def get_words_array(filename)
-    #code
+    return File.readlines(filename).map(&:split)
   end
 
-  def generate_question_and_answer_files()
-    words_array = self.get_words_array("filename")
+  def generate_question_and_answer_files(filename)
+    words_array = self.get_words_array(filename)
     question_and_answer_values = self.questions_and_answers(words_array)
   end
 
