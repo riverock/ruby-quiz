@@ -1,12 +1,13 @@
+require 'fileutils'
 class Quiz
   attr_accessor :questions, :answers
 
-  def initialize(word_length=4)
+  def initialize()
     @questions = []
     @answers = []
   end
 
-  def extract_unique(dictionary, word_length)
+  def extract_unique(dictionary, word_length=4)
     uniques = Hash.new(0)
     answers = Hash.new(0)
 
@@ -18,20 +19,19 @@ class Quiz
         answers[char] = idx
       end
     end
-
     repeats = uniques.reject{ |v,k|k==1 }.keys
-
     repeats.each do |r|
       uniques.delete(r)
       answers.delete(r)
     end
 
-    @questions = uniques.keys 
+    @questions = uniques.keys
 
     answers.values.each do |v|
       @answers << dictionary[v]
     end
 
+    Dir.mkdir('out') unless File.exists?('out/answers')
     File.open('out/questions', 'w') { |f| @questions.each { |q| f.write(q.to_s + "\n") } }
     File.open('out/answers', 'w') { |f| @answers.each { |a| f.write(a.to_s + "\n") } }
   end
