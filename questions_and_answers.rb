@@ -28,24 +28,26 @@ module QuestionsAndAnswers
     #code
   end
 
-  def question_and_answer_arrays
-    questions_intial = []
-    answers_initial = []
-
-    words.each do |word|
+  def questions_and_answers
+    sequences_and_words = words.map do |word|
       sequences = sequences_from_word(word)
 
-      questions_intial.push(sequences)
-      answers_initial.push(sequences.size)
-    end
-
-    questions_initial.flatten.map do |question|
-      if question
-
-      else
-
+      sequences.map do |sequence|
+        {
+          :sequence => sequence,
+          :word => word
+        }
       end
     end
+
+    uniq_sequences_and_words = sequences_and_words.flatten.uniq do |sequence_and_word|
+      sequence_and_word[:sequence]
+    end
+
+    questions = uniq_sequences_and_words.map { |x| x[:sequence] }
+    answers = uniq_sequences_and_words.map { |x| x[:word] }
+
+    return [questions, answers]
   end
 
 end
