@@ -1,14 +1,15 @@
 module QuestionsAndAnswers
 
-  SEQUENCE_LENGTH = 4
   WORDS_ARRAY = []
+  SEQUENCE_LENGTH = 4
+  SEQUENCE_REGEX = Regexp.new("(?=([a-z0-9]{#{SEQUENCE_LENGTH}}))")
 
   def sequence_in_word?(sequence, word)
     #code
   end
 
   def sequences_from_word(word)
-    #code
+    return word.scan(SEQUENCE_REGEX)
   end
 
   def sequence_in_any_words?(sequence, word_to_ommit)
