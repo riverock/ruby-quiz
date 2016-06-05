@@ -10,6 +10,15 @@ module QuestionsAndAnswers
   def generate_question_and_answer_files(filename)
     words_array = self.get_words_array(filename)
     question_and_answer_values = self.questions_and_answers(words_array)
+
+    question_and_answer_values.each do |question_and_answer_value|
+      write_filename = question_and_answer_value[:filename]
+      array = question_and_answer_value[:array]
+
+      File.open(write_filename, "w+") do |f|
+        f.puts(array)
+      end
+    end
   end
 
   def sequences_from_word(word)
@@ -45,10 +54,6 @@ module QuestionsAndAnswers
         :array => answers
       }
     ]
-  end
-
-  def write_to_file(filename, array)
-    #code
   end
 
 end
