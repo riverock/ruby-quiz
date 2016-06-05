@@ -1,36 +1,24 @@
 module QuestionsAndAnswers
 
-  WORDS_ARRAY = []
   SEQUENCE_LENGTH = 4
   SEQUENCE_REGEX = Regexp.new("(?=([a-z0-9]{#{SEQUENCE_LENGTH}}))")
 
-  # TODO:
-  def sequence_in_word?(sequence, word)
+  def get_words_array(filename)
     #code
+  end
+
+  def generate_question_and_answer_files()
+    words_array = self.get_words_array("filename")
+    question_and_answer_values = self.questions_and_answers(words_array)
   end
 
   def sequences_from_word(word)
     return word.scan(SEQUENCE_REGEX)
   end
 
-  # TODO:
-  def sequence_in_any_words?(sequence, word_to_ommit)
-    #code
-  end
-
-  # TODO:
-  def generate_questions_and_answers
-    #code
-  end
-
-  # TODO:
-  def write_to_file(filename, array)
-    #code
-  end
-
-  def questions_and_answers
-    sequences_and_words = words.map do |word|
-      sequences = sequences_from_word(word)
+  def questions_and_answers(words_array)
+    sequences_and_words = words_array.map do |word|
+      sequences = self.sequences_from_word(word)
 
       sequences.map do |sequence|
         {
@@ -47,7 +35,20 @@ module QuestionsAndAnswers
     questions = uniq_sequences_and_words.map { |x| x[:sequence] }
     answers = uniq_sequences_and_words.map { |x| x[:word] }
 
-    return [questions, answers]
+    return [
+      {
+        :filename => "questions",
+        :array => questions
+      }
+      {
+        :filename => "answers",
+        :array => answers
+      }
+    ]
+  end
+
+  def write_to_file(filename, array)
+    #code
   end
 
 end
