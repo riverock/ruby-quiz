@@ -1,1 +1,1 @@
-require '../questions_and_answers.rb'
+require_relative '../questions_and_answers.rb'
