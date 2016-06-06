@@ -11,3 +11,9 @@ describe '#sequences_from_word' do
     expect QuestionsAndAnswers.sequences_from_word('give') == %w(give)
   end
 end
+
+describe "#get_words_array" do
+  it "should return the correct array" do
+    expect get_words_array('words') == %w(arrows carrots give me)
+  end
+end
