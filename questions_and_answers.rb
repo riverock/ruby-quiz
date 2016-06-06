@@ -1,5 +1,8 @@
 module QuestionsAndAnswers
 
+  require 'pry'
+  require 'pry-remote'
+
   SEQUENCE_LENGTH = 4
   SEQUENCE_REGEX = Regexp.new("(?=([a-z0-9]{#{SEQUENCE_LENGTH}}))")
 
