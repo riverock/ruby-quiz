@@ -1,4 +1,4 @@
-  module QuestionsAndAnswers
+module QuestionsAndAnswers
 
   require 'pry'
   require 'pry-remote'
@@ -25,7 +25,7 @@
   end
 
   def sequences_from_word(word)
-    return word.scan(SEQUENCE_REGEX)
+    return word.scan(SEQUENCE_REGEX).flatten
   end
 
   def questions_and_answers(words_array)
