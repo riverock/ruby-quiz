@@ -4,7 +4,7 @@ module QuestionsAndAnswers
   SEQUENCE_REGEX = Regexp.new("(?=([a-z0-9]{#{SEQUENCE_LENGTH}}))")
 
   def get_words_array(filename)
-    return File.readlines(filename).map(&:split)
+    return File.readlines(filename).map(&:split).flatten
   end
 
   def generate_question_and_answer_files(filename)
@@ -48,7 +48,7 @@ module QuestionsAndAnswers
       {
         :filename => "questions",
         :array => questions
-      }
+      },
       {
         :filename => "answers",
         :array => answers
