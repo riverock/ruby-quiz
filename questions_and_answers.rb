@@ -29,7 +29,7 @@ module QuestionsAndAnswers
   end
 
   def questions_and_answers(words_array)
-    sequences_and_words = words_array.map do |word|
+    initial_sequences_and_words = words_array.map do |word|
       sequences = self.sequences_from_word(word)
 
       sequences.map do |sequence|
@@ -39,9 +39,12 @@ module QuestionsAndAnswers
         }
       end
     end
+    sequences_and_words = initial_sequences_and_words.reject(&:empty?).flatten
 
-    uniq_sequences_and_words = sequences_and_words.flatten.uniq do |sequence_and_word|
-      sequence_and_word[:sequence]
+    sequences_only = sequences_and_words.map { |x| x[:sequence] }
+    uniq_sequences_and_words = sequences_and_words.keep_if do |hsh|
+      sequence = hsh[:sequence]
+      sequences_only.count(sequence).eql? 1
     end
 
     questions = uniq_sequences_and_words.map { |x| x[:sequence] }
@@ -50,11 +53,11 @@ module QuestionsAndAnswers
     return [
       {
         :filename => "questions",
-        :array => questions
+        :array => questions.sort
       },
       {
         :filename => "answers",
-        :array => answers
+        :array => answers.sort
       }
     ]
   end
