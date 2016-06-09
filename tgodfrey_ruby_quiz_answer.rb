@@ -17,14 +17,12 @@ File.open("words") do |file|
 end
 
 words.each do |word|
+  # Only add the words which are longer than four characters
   if word.length >= 4
-    original_word = word
-    puts original_word
     chunks_remaining = word.length - 3
     while(chunks_remaining > 0)
       starting_index = chunks_remaining - 1
       chunk = word[starting_index,4]
-      puts chunk
       if duplicates.include?(chunk)
         # We've already seen this chunk at least once before.
         # Do nothing - move on to the next chunk
@@ -35,20 +33,23 @@ words.each do |word|
         duplicates.push(chunk)
       else
         # First time seeing this chunk - add it to the results!
-        results[chunk] = original_word
+        results[chunk] = word
       end
       chunks_remaining = chunks_remaining - 1
     end
   end
 end
 
+# Open our output files
 questions = File.new("questions.txt", "w")
 answers = File.new("answers.txt", "w")
 
+# Write the output files
 results.each do |question,answer|
   questions.puts question
   answers.puts answer
 end
 
+# Clean up
 questions.close
 answers.close
