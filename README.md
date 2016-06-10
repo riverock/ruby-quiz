@@ -52,3 +52,10 @@ and 'answers' would have:
 2. Create a feature branch for your solution (eg [github username]/solution)
 3. Complete work
 4. Open a pull request to submit.
+
+
+## Usage
+
+1. Firstly, run extract.rb to extract the compressed words file.
+2. Run app using `ruby driver.rb`
+3. For specs run `ruby test_ruby_quiz.rb`
