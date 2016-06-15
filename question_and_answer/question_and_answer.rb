@@ -41,8 +41,8 @@ class QuestionAndAnswer
 						matches += 1
 					end
 				if matches === 1
-					q.puts fragment
-					a.puts word
+					q.puts fragment + '/n'
+					a.puts word + '/n'
 				end	
 			end
 		end
