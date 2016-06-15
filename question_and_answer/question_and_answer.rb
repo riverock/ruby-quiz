@@ -36,10 +36,7 @@ class QuestionAndAnswer
 		a = File.new(answer_path, 'w')
 		self.dictionary.each do |word|
 			self.fragments[word].each do |fragment|
-				matches = 0
-					if fragment.match(word)
-						matches += 1
-					end
+				matches = self.dictionary.select {|word| word.match(fragment)}.count
 				if matches === 1
 					q.puts fragment + '/n'
 					a.puts word + '/n'
