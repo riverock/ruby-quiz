@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+require "letter_sequence"
+
+word_file = ARGV.shift
+
+unless word_file
+  warn "\nNo word file given"
+  warn "\nUsage: #{$0} WORDFILE\n"
+  exit -1
+end
+
+word_list = File.readlines(word_file).map{|w| w.chomp}
+
+start_time = Time.now
+
+results = LetterSequence::Sequencer.new(word_list).find_sequences
+
+end_time = Time.now
+
+File.write("questions.out", results[:questions].join("\n"))
+File.write("answers.out",   results[:answers].join("\n"))
+
+puts "\nCompleted #{word_list.length} words in #{"%0.6f" % (end_time - start_time).to_f} milliseconds"
+puts "Number of questions: #{results[:questions].length}"
+puts "Number of answers: #{results[:answers].length}"
