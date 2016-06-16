@@ -24,93 +24,42 @@ class LetterSequence::SequencerTest < Minitest::Test
   end
 
   def test_sequence_words
-    exp = [
-      {
-        word: "arrows",
-        sequences: ["arro", "rrow", "rows"]
-      },
-      {
-        word: "carrots",
-        sequences: ["carr", "arro", "rrot", "rots"]
-      },
-      {
-        word: "give",
-        sequences: ["give"]
-      },
-      {
-        word: "me",
-        sequences: []
-      }
-    ]
-    seq = @sequencer.sequence_words
-    assert_kind_of Array, seq
-    seq.each do |rec|
-      assert_kind_of Hash, rec
-    end
-
-    assert_equal exp.length, seq.length
-    assert_equal exp.map{|e| e[:word]}.sort, seq.map{|e| e[:word]}.sort
-    assert_equal exp.map{|e| e[:sequences].sort}.sort, seq.map{|e| e[:sequences].sort}.sort
+    exp = {
+      "arro" => ["arrows", "carrots"],
+      "rrow" => ["arrows"],
+      "rows" => ["arrows"],
+      "carr" => ["carrots"],
+      "rrot" => ["carrots"],
+      "rots" => ["carrots"],
+      "give" => ["give"]
+    }
+    @sequencer.sequence_words
+    assert_equal exp, @sequencer.sequence_hash
   end
 
 
   def test_dedup_sequences
-    data = [
-      {
-        word: "arrows",
-        sequences: ["arro", "rrow", "rows"]
-      },
-      {
-        word: "carrots",
-        sequences: ["carr", "arro", "rrot", "rots"]
-      },
-      {
-        word: "give",
-        sequences: ["give"]
-      },
-      {
-        word: "me",
-        sequences: []
-      }
-    ]
+    exp = {
+      "rrow" => ["arrows"],
+      "rows" => ["arrows"],
+      "carr" => ["carrots"],
+      "rrot" => ["carrots"],
+      "rots" => ["carrots"],
+      "give" => ["give"]
+    }
 
-    exp = [
-      {
-        word: "arrows",
-        sequences: ["rrow", "rows"]
-      },
-      {
-        word: "carrots",
-        sequences: ["carr", "rrot", "rots"]
-      },
-      {
-        word: "give",
-        sequences: ["give"]
-      },
-      {
-        word: "me",
-        sequences: []
-      }
-    ]
+    @sequencer.sequence_words
+    @sequencer.dedup_sequences
 
-    seq = @sequencer.dedup_sequences(data)
-    assert_kind_of Array, seq
-    seq.each do |rec|
-      assert_kind_of Hash, rec, rec.inspect
-    end
-
-    assert_equal exp.length, seq.length
-    assert_equal exp.map{|e| e[:word]}.sort, seq.map{|e| e[:word]}.sort
-    assert_equal exp.map{|e| e[:sequences].sort}.sort, seq.map{|e| e[:sequences].sort}.sort
+    assert_equal exp, @sequencer.sequence_hash
   end
 
   def test_scan_word
-    exp = {word: "carrots", sequences: %w[carr arro rrot rots]}
-    scans = @sequencer.scan_word(exp[:word])
-    assert_kind_of Hash, scans
-    assert_equal exp.keys.sort, scans.keys.sort
-    assert_equal exp[:word], scans[:word]
-    assert_equal exp[:sequences].sort, scans[:sequences].sort
+    input = "carrots"
+    exp = %w[carr arro rrot rots]
+    scans = @sequencer.scan_word(input)
+    assert_kind_of Array, scans
+    assert_equal exp.sort, scans.sort
   end
 
 end

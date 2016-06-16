@@ -2,6 +2,22 @@
 
 require "letter_sequence"
 
+def run(list, n, klass)
+
+  start_time = Time.now
+  results = klass.new(list).find_sequences
+  end_time = Time.now
+
+  File.write("questions#{n}.out", results[:questions].sort.join("\n"))
+  File.write("answers#{n}.out",   results[:answers].sort.join("\n"))
+
+  puts "\nSEQUENCER RUN #{n}"
+  puts "\nCompleted #{list.length} words in #{"%0.6f" % (end_time - start_time).to_f} seconds"
+  puts "Number of questions: #{results[:questions].length}"
+  puts "Number of answers: #{results[:answers].length}"
+
+end
+
 word_file = ARGV.shift
 
 unless word_file
@@ -12,15 +28,4 @@ end
 
 word_list = File.readlines(word_file).map{|w| w.chomp}
 
-start_time = Time.now
-
-results = LetterSequence::Sequencer.new(word_list).find_sequences
-
-end_time = Time.now
-
-File.write("questions.out", results[:questions].join("\n"))
-File.write("answers.out",   results[:answers].join("\n"))
-
-puts "\nCompleted #{word_list.length} words in #{"%0.6f" % (end_time - start_time).to_f} milliseconds"
-puts "Number of questions: #{results[:questions].length}"
-puts "Number of answers: #{results[:answers].length}"
+run(word_list, 1, LetterSequence::Sequencer)
