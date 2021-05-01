@@ -24,7 +24,7 @@ class GenerateQuestions
     begin
       tar_extract = Gem::Package::TarReader.new(Zlib::GzipReader.open("./#{@file_name}"))
       tar_extract.each do |entry|
-        if entry.full_name == 'words'
+        if entry.full_name == @file_name.split('.').first
           entry.read.each_line do |word|
             new_word = word.strip # Removing the whitespace of the word! "AAAS\n" => "AAAS".
             if new_word.length >= 4 && new_word[/[a-zA-Z]+/] == new_word # only pushing words that are 4 letters or more and real words with only letters.
