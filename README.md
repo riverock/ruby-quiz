@@ -1,5 +1,15 @@
 # Instructions
 
+To run the quiz, be sure you are in the path of the app:
+1. Extract your words list if zipped, as the file needs to be named 'words' (no extension).
+2. Place your word list file in the root of the app ( ruby-quiz/words )
+3. In your terminal, run the command:
+    ```
+   ruby -I . -r "engine" -e "Engine.run"
+    ```
+4. Depending on how many words you have it could take a while. 
+
+###Original Instructions:
 There's no correct way to
 solve this, and take as much time as you need...we're just trying to
 get a look at your coding style and thought process.
@@ -8,6 +18,7 @@ Make sure to include the unit tests you write for this in your submission.
 
 ## Code
 
+###Original Instructions:
 Given a list of words ([words.tar.gz](https://github.com/riverock/ruby-quiz/blob/master/words.tar.gz)), generate two output
 files, 'questions' and 'answers'.  'questions' should contain every
 sequence of four letters that appears in exactly one word of the
