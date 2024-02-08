@@ -8,10 +8,10 @@ class TestDict < Minitest::Test
     end
 
     def setup
-      @dict = Dict.new(file_w = "#{Dict::ROOT_PATH}/test/minitest/files/words_test.txt",
-                       file_q = "#{Dict::ROOT_PATH}/test/minitest/files/questions_test.txt",
-                       file_a = "#{Dict::ROOT_PATH}/test/minitest/files/answers_test.txt",
-                       do_puts = false)
+      @dict = Dict.new(file_w: "#{Dict::ROOT_PATH}/test/minitest/files/words_test.txt",
+                       file_q: "#{Dict::ROOT_PATH}/test/minitest/files/questions_test.txt",
+                       file_a: "#{Dict::ROOT_PATH}/test/minitest/files/answers_test.txt",
+                       do_puts: false)
     end
 
     def test_that_files_are_initialized

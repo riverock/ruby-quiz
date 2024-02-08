@@ -8,7 +8,7 @@ class Dict
   attr_accessor :all_words, :filtered_words, :all_questions_hash
   attr_accessor :file_w, :file_q, :file_a, :do_puts
 
-  def initialize(file_w = nil, file_q = nil, file_a = nil, do_puts = true)
+  def initialize(file_w: nil, file_q: nil, file_a: nil, do_puts: true)
     @file_w = file_w || FILE_WORDS
     @file_q = file_q || FILE_QUESTIONS
     @file_a = file_a || FILE_ANSWERS
