@@ -39,4 +39,32 @@ class TestDict < Minitest::Test
                "give"=>{"word"=>["give"], "count"=>1}})
     end
 
+    def test_that_questions_are_correct_test
+      questions = 
+'rrow
+rows
+carr
+rrot
+rots
+give
+'
+      @dict.run
+      file = File.open(@dict.file_q, 'r')
+      assert_equal(file.read, questions)
+    end
+
+    def test_that_answers_are_correct_test
+      answers = 
+'arrows
+arrows
+carrots
+carrots
+carrots
+give
+'
+      @dict.run
+      file = File.open(@dict.file_a, 'r')
+      assert_equal(file.read, answers)
+    end
+
 end
